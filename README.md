@@ -3,9 +3,6 @@
 
 ``` bash
 
-#  To create a new vue + typescript project, run:
-vue init ws456999/vue-typescript-starter#template `your project name`
-
 # then
 cd `your project name`
 

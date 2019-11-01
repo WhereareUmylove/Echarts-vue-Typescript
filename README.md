@@ -3,9 +3,6 @@
 
 ``` bash
 
-# then
-cd `your project name`
-
 # Install project dependencies
 npm install
 

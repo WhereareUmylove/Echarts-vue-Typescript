@@ -13,8 +13,56 @@ import echarts from "echarts";
   components: {}
 })
 export default class App extends Vue {
+  formatDate() {
+    var data = [
+      "市场\t代码\t活跃度\t现价\t昨收\t开盘\t最高\t最低\t时间\t保留\t总量\t现量\t总金额\t内盘\t外盘\t保留\t保留\t买一价\t卖一价\t买一量\t卖一量\t买二价\t卖二价\t买二量\t卖二量\t买三价\t卖三价\t买三量\t卖三量\t买四价\t卖四价\t买四量\t卖四量\t买五价\t卖五价\t买五量\t卖五量\t保留\t总笔\t保留\t保留\t保留\t买六价\t卖六价\t买六量\t卖六量\t买七价\t卖七价\t买七量\t卖七量\t买八价\t卖八价\t买八量\t卖八量\t买九价\t卖九价\t买九量\t卖九量\t买十价\t卖十价\t买十量\t卖十量\t买均\t卖均\t总买\t总卖",
+      "1\t600000\t2150\t12.780000\t12.750000\t12.750000\t12.890000\t12.690000\t112958\t0\t303550\t25\t387960704.00\t172035\t131516\t0\t270682\t12.780000\t12.790000\t4234\t710\t12.770000\t12.800000\t1860\t968\t12.760000\t12.810000\t6013\t1037\t12.750000\t12.820000\t711\t1518\t12.740000\t12.830000\t548\t1548\t3789\t0\t0\t34850\t18987\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0",
+      "1\t600004\t2211\t18.500000\t18.110000\t18.010000\t18.660000\t17.960000\t113001\t0\t230733\t35\t426773920.00\t105074\t125660\t0\t229447\t18.470000\t18.500000\t280\t640\t18.460000\t18.510000\t43\t19\t18.450000\t18.520000\t1090\t61\t18.440000\t18.530000\t299\t408\t18.430000\t18.540000\t259\t123\t4748\t0\t0\t5380\t18506\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0\t0.000000\t0.000000\t0\t0"
+    ];
+    var Data2 = [
+        "时间\t开盘价\t收盘价\t最高价\t最低价\t成交量\t成交额",
+        "2019-11-05 10:21\t16.900000\t16.890000\t16.900000\t16.880000\t130900\t2209992.000000",
+        "2019-11-05 10:22\t16.890000\t16.890000\t16.900000\t16.880000\t289700\t4893860.000000",
+        "2019-11-05 10:23\t16.890000\t16.910000\t16.910000\t16.890000\t179200\t3028053.000000",
+        "2019-11-05 10:24\t16.900000\t16.920000\t16.920000\t16.900000\t146100\t2470939.000000",
+        "2019-11-05 10:25\t16.910000\t16.920000\t16.930000\t16.910000\t198700\t3362053.000000",
+        "2019-11-05 10:26\t16.920000\t16.920000\t16.930000\t16.910000\t138200\t2338248.000000",
+        "2019-11-05 10:27\t16.940000\t16.930000\t16.940000\t16.920000\t205000\t3470981.000000",
+        "2019-11-05 10:28\t16.940000\t16.930000\t16.940000\t16.930000\t154800\t2621855.000000",
+        "2019-11-05 10:29\t16.930000\t16.970000\t16.980000\t16.930000\t1156400\t19603580.000000",
+        "2019-11-05 10:30\t16.980000\t16.970000\t16.980000\t16.970000\t176700\t2999539.000000"
+    ]
+    var key,value,newData = {}
+    key = data[0].split(/\s+/)
+    value = data[1].split(/\s+/)
+    for(let i=0;i<key.length;i++){
+      newData[key[i]] = value[i]
+    }
+  }
+  created(){
+    // this.formatDate()
+  }
+
   mounted() {
     var myChart = echarts.init(this.$refs.chart as HTMLCanvasElement);
+    var rawData2 = [
+        "时间\t开盘价\t收盘价\t最高价\t最低价\t成交量\t成交额",
+        "2019-11-05 10:21\t16.900000\t16.890000\t16.900000\t16.880000\t130900\t2209992.000000",
+        "2019-11-05 10:22\t16.890000\t16.890000\t16.900000\t16.880000\t289700\t4893860.000000",
+        "2019-11-05 10:23\t16.890000\t16.910000\t16.910000\t16.890000\t179200\t3028053.000000",
+        "2019-11-05 10:24\t16.900000\t16.920000\t16.920000\t16.900000\t146100\t2470939.000000",
+        "2019-11-05 10:25\t16.910000\t16.920000\t16.930000\t16.910000\t198700\t3362053.000000",
+        "2019-11-05 10:26\t16.920000\t16.920000\t16.930000\t16.910000\t138200\t2338248.000000",
+        "2019-11-05 10:27\t16.940000\t16.930000\t16.940000\t16.920000\t205000\t3470981.000000",
+        "2019-11-05 10:28\t16.940000\t16.930000\t16.940000\t16.930000\t154800\t2621855.000000",
+        "2019-11-05 10:29\t16.930000\t16.970000\t16.980000\t16.930000\t1156400\t19603580.000000",
+        "2019-11-05 10:30\t16.980000\t16.970000\t16.980000\t16.970000\t176700\t2999539.000000"
+    ]
+    var newRawData = []
+    rawData2 = rawData2.slice(1,rawData2.length)
+    for (let index = 0; index < rawData2.length; index++) {
+      newRawData.push(rawData2[index].split(/\s+/))
+    }
 
     var rawData = [
       [
@@ -2965,17 +3013,23 @@ export default class App extends Vue {
       return result;
     }
 
-    var dates = rawData.map(function(item) {
-      return item[0];
+    var dates = newRawData.map(function(item) {
+      return item[0]+' '+item[1];
     });
 
-    var data = rawData.map(function(item) {
-      return [+item[1], +item[2], +item[5], +item[6]];
+    var data = newRawData.map(function(item) {
+      return [+item[2], +item[3], +item[5], +item[4]];
+    });
+    var 成交量 = newRawData.map(function(item) {
+      return item[6];
+    });
+    var 成交额 = newRawData.map(function(item) {
+      return item[7];
     });
     var option = {
       backgroundColor: "#21202D",
       legend: {
-        data: ["日K", "MA5", "MA10", "MA20", "MA30"],
+        data: ["日K", "成交量", "成交额"],
         inactiveColor: "#777",
         textStyle: {
           color: "#fff"
@@ -3051,9 +3105,9 @@ export default class App extends Vue {
           }
         },
         {
-          name: "MA5",
+          name: "成交量",
           type: "line",
-          data: calculateMA(5, data),
+          data: 成交量,
           smooth: true,
           showSymbol: false,
           lineStyle: {
@@ -3063,9 +3117,9 @@ export default class App extends Vue {
           }
         },
         {
-          name: "MA10",
+          name: "成交额",
           type: "line",
-          data: calculateMA(10, data),
+          data: 成交额,
           smooth: true,
           showSymbol: false,
           lineStyle: {
@@ -3074,45 +3128,30 @@ export default class App extends Vue {
             }
           }
         },
-        {
-          name: "MA20",
-          type: "line",
-          data: calculateMA(20, data),
-          smooth: true,
-          showSymbol: false,
-          lineStyle: {
-            normal: {
-              width: 1
-            }
-          }
-        },
-        {
-          name: "MA30",
-          type: "line",
-          data: calculateMA(30, data),
-          smooth: true,
-          showSymbol: false,
-          lineStyle: {
-            normal: {
-              width: 1
-            }
-          }
-        }
-      ]
-    };
-    var option2 = {
-      xAxis: {
-        type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-      },
-      yAxis: {
-        type: "value"
-      },
-      series: [
-        {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: "line"
-        }
+        // {
+        //   name: "MA20",
+        //   type: "line",
+        //   data: calculateMA(20, data),
+        //   smooth: true,
+        //   showSymbol: false,
+        //   lineStyle: {
+        //     normal: {
+        //       width: 1
+        //     }
+        //   }
+        // },
+        // {
+        //   name: "MA30",
+        //   type: "line",
+        //   data: calculateMA(30, data),
+        //   smooth: true,
+        //   showSymbol: false,
+        //   lineStyle: {
+        //     normal: {
+        //       width: 1
+        //     }
+        //   }
+        // }
       ]
     };
 
@@ -3122,7 +3161,7 @@ export default class App extends Vue {
 </script>
 
 <style scoped>
-.index{
+.index {
   height: 100%;
   width: 100%;
 }

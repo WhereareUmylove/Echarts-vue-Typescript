@@ -3,7 +3,6 @@ import Router from 'vue-router'
 const index:AsyncComponent = ():any => import("../view/index.vue")
 
 Vue.use(Router)
-
 export default new Router({
   mode: 'history',
   routes: [

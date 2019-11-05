@@ -1,6 +1,8 @@
 <template>
   <div class="index">
     <div style="width: 100%;height: 800px;" ref="chart"></div>
+    <input type="text" />
+    <button>确定</button>
   </div>
 </template>
 
@@ -44,19 +46,31 @@ export default class App extends Vue {
   }
 
   mounted() {
+
     var myChart = echarts.init(this.$refs.chart as HTMLCanvasElement);
     var rawData2 = [
         "时间\t开盘价\t收盘价\t最高价\t最低价\t成交量\t成交额",
-        "2019-11-05 10:21\t16.900000\t16.890000\t16.900000\t16.880000\t130900\t2209992.000000",
-        "2019-11-05 10:22\t16.890000\t16.890000\t16.900000\t16.880000\t289700\t4893860.000000",
-        "2019-11-05 10:23\t16.890000\t16.910000\t16.910000\t16.890000\t179200\t3028053.000000",
-        "2019-11-05 10:24\t16.900000\t16.920000\t16.920000\t16.900000\t146100\t2470939.000000",
-        "2019-11-05 10:25\t16.910000\t16.920000\t16.930000\t16.910000\t198700\t3362053.000000",
-        "2019-11-05 10:26\t16.920000\t16.920000\t16.930000\t16.910000\t138200\t2338248.000000",
-        "2019-11-05 10:27\t16.940000\t16.930000\t16.940000\t16.920000\t205000\t3470981.000000",
-        "2019-11-05 10:28\t16.940000\t16.930000\t16.940000\t16.930000\t154800\t2621855.000000",
-        "2019-11-05 10:29\t16.930000\t16.970000\t16.980000\t16.930000\t1156400\t19603580.000000",
-        "2019-11-05 10:30\t16.980000\t16.970000\t16.980000\t16.970000\t176700\t2999539.000000"
+        "20190228\t11.200000\t12.360000\t12.660000\t10.900000\t19114742\t22306695168.000000",
+        "20190329\t12.480000\t12.820000\t13.380000\t12.010000\t26713024\t33645830144.000000",
+        "20190430\t12.830000\t13.850000\t14.840000\t12.830000\t25931698\t36205465600.000000",
+        "20190531\t13.100000\t12.180000\t13.350000\t11.930000\t18649608\t23370285056.000000",
+        "20190628\t12.220000\t13.780000\t13.950000\t11.600000\t16621579\t21377644544.000000",
+        "20190228\t11.200000\t12.360000\t12.660000\t10.900000\t19114742\t22306695168.000000",
+        "20190329\t12.480000\t12.820000\t13.380000\t12.010000\t26713024\t33645830144.000000",
+        "20190430\t12.830000\t13.850000\t14.840000\t12.830000\t25931698\t36205465600.000000",
+        "20190531\t13.100000\t12.180000\t13.350000\t11.930000\t18649608\t23370285056.000000",
+        "20190628\t12.220000\t13.780000\t13.950000\t11.600000\t16621579\t21377644544.000000",
+        "20190228\t11.200000\t12.360000\t12.660000\t10.900000\t19114742\t22306695168.000000",
+        "20190329\t12.480000\t12.820000\t13.380000\t12.010000\t26713024\t33645830144.000000",
+        "20190430\t12.830000\t13.850000\t14.840000\t12.830000\t25931698\t36205465600.000000",
+        "20190531\t13.100000\t12.180000\t13.350000\t11.930000\t18649608\t23370285056.000000",
+        "20190628\t12.220000\t13.780000\t13.950000\t11.600000\t16621579\t21377644544.000000",
+        "20190228\t11.200000\t12.360000\t12.660000\t10.900000\t19114742\t22306695168.000000",
+        "20190329\t12.480000\t12.820000\t13.380000\t12.010000\t26713024\t33645830144.000000",
+        "20190430\t12.830000\t13.850000\t14.840000\t12.830000\t25931698\t36205465600.000000",
+        "20190531\t13.100000\t12.180000\t13.350000\t11.930000\t18649608\t23370285056.000000",
+        "20190628\t12.220000\t13.780000\t13.950000\t11.600000\t16621579\t21377644544.000000",
+        "20190228\t11.200000\t12.360000\t12.660000\t10.900000\t19114742\t22306695168.000000"
     ]
     var newRawData = []
     rawData2 = rawData2.slice(1,rawData2.length)
@@ -3006,7 +3020,7 @@ export default class App extends Vue {
         }
         var sum = 0;
         for (var j = 0; j < dayCount; j++) {
-          sum += data[i - j][1];
+          sum += data[i - j][2];
         }
         result.push(sum / dayCount);
       }
@@ -3014,22 +3028,16 @@ export default class App extends Vue {
     }
 
     var dates = newRawData.map(function(item) {
-      return item[0]+' '+item[1];
+      return item[0];
     });
 
     var data = newRawData.map(function(item) {
-      return [+item[2], +item[3], +item[5], +item[4]];
-    });
-    var 成交量 = newRawData.map(function(item) {
-      return item[6];
-    });
-    var 成交额 = newRawData.map(function(item) {
-      return item[7];
+      return [+item[1], +item[2], +item[4], +item[3]];
     });
     var option = {
       backgroundColor: "#21202D",
       legend: {
-        data: ["日K", "成交量", "成交额"],
+        data: ["日K", "MA5", "MA10", "MA20", "MA30"],
         inactiveColor: "#777",
         textStyle: {
           color: "#fff"
@@ -3097,61 +3105,65 @@ export default class App extends Vue {
           data: data,
           itemStyle: {
             normal: {
-              color: "#FD1050",
-              color0: "#0CF49B",
-              borderColor: "#FD1050",
-              borderColor0: "#0CF49B"
+              color: "#FF3300",
+              color0: "#00FF00",
+              borderColor: "#FF3300",
+              borderColor0: "#00FF00"
             }
           }
         },
         {
-          name: "成交量",
+          name: "MA5",
           type: "line",
-          data: 成交量,
+          data: calculateMA(1, data),
           smooth: true,
           showSymbol: false,
           lineStyle: {
             normal: {
+              color: "#FF9900",
               width: 1
             }
           }
         },
         {
-          name: "成交额",
+          name: "MA10",
           type: "line",
-          data: 成交额,
+          data: calculateMA(2, data),
           smooth: true,
           showSymbol: false,
           lineStyle: {
             normal: {
+              color: "#33CCFF",
               width: 1
             }
           }
         },
-        // {
-        //   name: "MA20",
-        //   type: "line",
-        //   data: calculateMA(20, data),
-        //   smooth: true,
-        //   showSymbol: false,
-        //   lineStyle: {
-        //     normal: {
-        //       width: 1
-        //     }
-        //   }
-        // },
-        // {
-        //   name: "MA30",
-        //   type: "line",
-        //   data: calculateMA(30, data),
-        //   smooth: true,
-        //   showSymbol: false,
-        //   lineStyle: {
-        //     normal: {
-        //       width: 1
-        //     }
-        //   }
-        // }
+        {
+          name: "MA20",
+          type: "line",
+          data: calculateMA(4, data),
+          smooth: true,
+          showSymbol: false,
+          lineStyle: {
+            normal: {
+              color: "#FFFF00",
+              width: 1
+            }
+          }
+        },
+        {
+          name: "MA30",
+          type: "line",
+          data: calculateMA(6, data),
+          smooth: true,
+          showSymbol: false,
+          lineStyle: {
+            normal: {
+              color: "#FF00FF",
+              width: 1
+            }
+          }
+        }
       ]
     };
 
@@ -3161,7 +3173,7 @@ export default class App extends Vue {
 </script>
 
 <style scoped>
-.index {
+.index{
   height: 100%;
   width: 100%;
 }
